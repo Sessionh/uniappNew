@@ -1,10 +1,11 @@
 <template name="page-head">
 	<view class="uni-page-head" :style="{color: color, background: background}">
 		<view class="back">
-			<text class="iconfont icon-icon"></text>
+			<text class="iconfont icon-fanhui" v-if="isBack"></text>
 		</view>
 		<view class="uni-page-head-title">{{title}}</view>
 		<view class="right_content"></view>
+		
 	</view>
 </template>
 <script>
@@ -22,6 +23,10 @@
 			background: {
 				type: String,
 				default: 'black'
+			},
+			isBack: {
+				type: Boolean,
+				default: false,
 			}
 		}
 	}
@@ -54,6 +59,9 @@
 	}
 	.back {
 		width: 60upx;
+		.iconfont {
+			font-size: 40upx;
+		}
 	}
 	.right_content {
 		width: 60upx;

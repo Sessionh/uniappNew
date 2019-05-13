@@ -14,5 +14,5 @@
 
 <style lang="less">
 	/*每个页面公共css */
-	@import "./font/iconfont.css";
+	@import "./font/iconfont1.css";
 </style>
