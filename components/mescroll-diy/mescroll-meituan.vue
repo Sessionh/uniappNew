@@ -1,15 +1,17 @@
 <template>
-	<view :style="{'padding-top':padTop,'padding-bottom':padBottom}" @touchstart="touchstartEvent" @touchmove="touchmoveEvent" @touchend="touchendEvent" @touchcancel="touchendEvent">
+	<view :style="{'padding-top':padTop,'padding-bottom':padBottom}" @touchstart="touchstartEvent" @touchmove="touchmoveEvent" @touchend="touchendEvent" @touchcancel="touchendEvent">		
+		<view class="default_top" :style="{paddingTop: topDefault}"></view>
 		<!-- 下拉加载区域 -->
 		<view v-if="optDown" class="mescroll-downwarp" :class="{'mescroll-downwarp-reset':isDownReset}" :style="{'height': downHight+'px', 'position': 'relative', 'overflow': 'hidden', '-webkit-transition': isDownReset?'height 300ms':''}">
 			<view class="downwarp-content">
 				<view :style="{'height':downLoadHeight}" :class="{'downwarp-load':!isDownLoading,'downwarp-load-start':isDownLoading}"></view>
-				<view class="downwarp-load-preload"></view>
+				<view class="downwarp-load-preload"></view>				
 			</view>
 		</view>
 
 		<!-- 列表内容 -->
 		<slot></slot>
+		
 
 		<!-- 空布局 -->
 		<view v-if="optEmpty&&isShowEmpty" class="mescroll-empty">
@@ -36,9 +38,9 @@
 
 <script>
 	// 引入mescroll-uni.js,处理核心逻辑
-	import MeScroll from './mescroll_uni.js';
+	import MeScroll from '../mescroll-uni/mescroll-uni.js';
 	// 引入全局配置
-	import GlobalOption from './mescroll_option.js';
+	import GlobalOption from './mescroll-meituan-option.js';
 
 	export default {
 		data() {
@@ -79,11 +81,18 @@
 			},
 			// padding-top的数值,单位upx,需转成px. 目的是使下拉布局往下偏移
 			padTop(){
+				
+				// return Number(this.top) || 0 +'px';
 				return uni.upx2px(Number(this.top) || 0)+'px';
 			},
 			// padding-bottom的数值,单位upx,需转成px 目的是使上拉布局往上偏移
 			padBottom(){
 				return uni.upx2px(Number(this.bottom) || 0)+'px';
+			},
+			topDefault() {
+				const res = uni.getSystemInfoSync();
+				const topNum = res.statusBarHeight + 45;
+				return topNum + 'px'
 			}
 		},
 		methods: {
@@ -112,7 +121,7 @@
 				});
 				this.$emit('topclick',this.mescroll) // 派发点击回到顶部按钮的回调
 			}
-		},
+		},		
 		// 编译到H5,不会执行onReady,只执行mounted
 		mounted() {
 			let vm = this;
@@ -210,8 +219,22 @@
 	}
 </script>
 
-<style scoped>
-	@import "./less/myscroll.css";
+<style>
+	@import "../mescroll-uni/mescroll-uni.css";
+
+	.default_top {
+		width: 100%;		
+		height: 1px;
+	}	
+
+	@keyframes spin {
+		0%, 15% {
+			transform: rotate(0);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
 	
 	/*下拉刷新--向下进度动画*/
 	.mescroll-downwarp .downwarp-load{
@@ -220,7 +243,7 @@
 		margin: auto;
 	    border-radius: 0;
 		background-size: 100% 100%;
-		background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress0.png);
+		background-image: url(~@/static/imgMe/mescroll-progress0.png);
 	}
 	
 	/*下拉刷新--资源预加载,避免下拉的时候闪白屏*/
@@ -240,39 +263,41 @@
 		animation: animProgress .3s steps(1,end), animLoading .3s steps(1,end) .3s infinite;
 	}
 	@-webkit-keyframes animProgress {
-		0% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress0.png)}
-		16% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress1.png)}
-		32% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress2.png)}
-		48% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress3.png)}
-		64% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress4.png)}
-		80% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress5.png)}
-		100% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress0.png)}
+		0% {background-image: url( ~@/static/imgMe/mescroll-progress0.png)}
+		16% {background-image: url(~@/static/imgMe/mescroll-progress1.png)}
+		32% {background-image: url(~@/static/imgMe/mescroll-progress2.png)}
+		48% {background-image: url(~@/static/imgMe/mescroll-progress3.png)}
+		64% {background-image: url(~@/static/imgMe/mescroll-progress4.png)}
+		80% {background-image: url(~@/static/imgMe/mescroll-progress5.png)}
+		100% {background-image: url(~@/static/imgMe/mescroll-progress0.png)}
 	}
 	@keyframes animProgress {
-		0% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress0.png)}
-		16% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress1.png)}
-		32% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress2.png)}
-		48% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress3.png)}
-		64% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress4.png)}
-		80% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress5.png)}
-		100% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-progress0.png)}
+		0% {background-image: url( ~@/static/imgMe/mescroll-progress0.png)}
+		16% {background-image: url(~@/static/imgMe/mescroll-progress1.png)}
+		32% {background-image: url(~@/static/imgMe/mescroll-progress2.png)}
+		48% {background-image: url(~@/static/imgMe/mescroll-progress3.png)}
+		64% {background-image: url(~@/static/imgMe/mescroll-progress4.png)}
+		80% {background-image: url(~@/static/imgMe/mescroll-progress5.png)}
+		100% {background-image: url(~@/static/imgMe/mescroll-progress0.png)}
 	}
+	
+	
 	@-webkit-keyframes animLoading {
-		0% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading1.png)}
-		16% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading2.png)}
-		32% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading3.png)}
-		48% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading4.png)}
-		64% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading5.png)}
-		80% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading6.png)}
-		100% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading1.png)}
+		0% {background-image: url(~@/static/imgMe//mescroll-loading1.png)}
+		16% {background-image: url(~@/static/imgMe//mescroll-loading2.png)}
+		32% {background-image: url(~@/static/imgMe//mescroll-loading3.png)}
+		48% {background-image: url(~@/static/imgMe//mescroll-loading4.png)}
+		64% {background-image: url(~@/static/imgMe//mescroll-loading5.png)}
+		80% {background-image: url(~@/static/imgMe//mescroll-loading6.png)}
+		100% {background-image: url(~@/static/imgMe//mescroll-loading1.png)}
 	}
 	@keyframes animLoading {
-		0% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading1.png)}
-		16% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading2.png)}
-		32% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading3.png)}
-		48% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading4.png)}
-		64% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading5.png)}
-		80% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading6.png)}
-		100% {background-image: url(http://www.mescroll.com/img/meituan/mescroll-loading1.png)}
+		0% {background-image: url(~@/static/imgMe//mescroll-loading1.png)}
+		16% {background-image: url(~@/static/imgMe//mescroll-loading2.png)}
+		32% {background-image: url(~@/static/imgMe//mescroll-loading3.png)}
+		48% {background-image: url(~@/static/imgMe//mescroll-loading4.png)}
+		64% {background-image: url(~@/static/imgMe//mescroll-loading5.png)}
+		80% {background-image: url(~@/static/imgMe//mescroll-loading6.png)}
+		100% {background-image: url(~@/static/imgMe//mescroll-loading1.png)}
 	}
 </style>

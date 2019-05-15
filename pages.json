@@ -8,19 +8,13 @@
 		},
 		{
 			"path": "pages/video/video_class_room",
-			"style": {
-				// #ifndef MP-WEIXIN 
-				"navigationStyle":"custom",
-				// #endif
+			"style": {			
 				"navigationBarTitleText": "课堂"
 			}
 		},
 		{
 			"path": "pages/note/note",
-			"style": {
-				// #ifndef MP-WEIXIN 
-				"navigationStyle":"custom",
-				// #endif
+			"style": {				
 				"navigationBarTitleText": "笔记"
 				
 			}
@@ -28,7 +22,7 @@
 		{
 			"path": "pages/user/user_view",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "black"
 				
@@ -36,10 +30,7 @@
 		},
 		{
 			"path": "pages/shopping/shopping_view",
-			"style": {
-				// #ifndef MP-WEIXIN 
-				"navigationStyle":"custom",
-				// #endif
+			"style": {				
 				"navigationBarTitleText": ""
 			}
 		},
@@ -51,10 +42,7 @@
 		},
 		{
 			"path": "pages/index/subpage/menu_type",
-			"style": {
-				// #ifndef MP-WEIXIN 
-				"navigationStyle":"custom",
-				// #endif
+			"style": {				
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": true
 				

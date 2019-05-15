@@ -1,7 +1,7 @@
 <template>
 	<view class="content" >
 		
-		<view class="header_top"></view>
+		<page-head  :title="title" color="black" background="#fff" ></page-head>
 		
 		<view class="header"  v-if="isShow">
 			<view class="search">
@@ -21,6 +21,7 @@
 			</view>
 			<view class="half_bar"/>
 		</view>
+		
 		
 		
 		<view class="part">
@@ -56,15 +57,17 @@
 	import activityImage from './activity_image';
 	import footLook from './foot_look';
 	import {menuListData} from './main.js';
+	import pageHead from '../../components/page_head.vue';
 	export default {
 		components: {
 			menuList,
 			activityImage,
 			footLook,
+			pageHead
 		},
 		data() {
 			return {
-				title: 'Hello',
+				title: '首页',
 				viewHeight: 300,
 				isShow: true,
 				menuListData: menuListData,
@@ -119,7 +122,7 @@
             halfWidth() {
 				
                 return uni.upx2px(750 / 2) + 'px';
-            }
+            }			
         },
 		methods: {
 			onBut() {
@@ -150,7 +153,6 @@
 </script>
 
 <style lang="less" scoped>
-
 .search {
 	display: flex;
 	height: 90upx;
@@ -230,7 +232,7 @@
 .part{
     width: 100%;
     height: 300upx;
-	margin-top: 90upx;
+	// margin-top: 90upx;
 	.banner_box{
 	    width: 100%;
 	    height: 100%;

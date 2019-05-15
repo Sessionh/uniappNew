@@ -1,5 +1,5 @@
 <template name="page-head">
-	<view class="uni-page-head" :style="{color: color, background: background}">
+	<view class="uni-page-head" :style="{color: color, background: background, paddingTop: top}">
 		<view class="back">
 			<text class="iconfont icon-fanhui" v-if="isBack"></text>
 		</view>
@@ -28,13 +28,23 @@
 				type: Boolean,
 				default: false,
 			}
+		},
+		data() {
+			return {
+				
+			}
+		},
+		computed: {
+			top() {
+				const res = uni.getSystemInfoSync();
+                return res.statusBarHeight + 'px';
+			}
 		}
 	}
 </script>
 <style lang="less" scoped>
 	/* page */
-	.uni-page-head{
-		padding-top: 20.5px; 
+	.uni-page-head{	
 		text-align: center;
 		position: fixed;
 		top: 0;
