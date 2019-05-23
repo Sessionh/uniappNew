@@ -1,5 +1,6 @@
 <template>
 	<view class="menu_type">
+		<page-head isBack="back" :isUrl="true" @backPage="backHome"  title="菜谱分类" color="#fff" background="#7e7979" ></page-head>
 		<view class="header">
 			<text class="iconfont icon-icon-" @click="onBack"></text>
 			<view class="title">菜谱分类</view>
@@ -39,7 +40,11 @@
 
 <script>
 import {menuList, hotFootList, greenstuffList} from './menu_type_data.js'
+import pageHead from '../../../components/page_head.vue'
 export default {
+	components: {
+		pageHead		
+	},
 	data() {
 		return {
 			thatS: 1,
@@ -87,6 +92,12 @@ export default {
 		},
 		contentClick(val) {
 			console.log(val);
+			
+		},
+		backHome() { // 返回首页
+		    uni.switchTab({
+		    	url: '../index'
+		    })
 			
 		}
 	}

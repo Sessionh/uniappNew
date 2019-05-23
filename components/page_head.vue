@@ -1,7 +1,10 @@
 <template name="page-head">
 	<view class="uni-page-head" :style="{color: color, background: background, paddingTop: top}">
-		<view class="back">
-			<text class="iconfont icon-fanhui" v-if="isBack"></text>
+		<view class="back" >
+			<view class="back_content" @click="backPage">
+				<text class="iconfont icon-fanhui" v-if="isBack" ></text>
+			</view>
+			
 		</view>
 		<view class="uni-page-head-title">{{title}}</view>
 		<view class="right_content"></view>
@@ -12,26 +15,44 @@
 	export default {
 		name: "page-head",
 		props: {
-			title: {
+			title: { // 标题
 				type: String,
 				default: ""
 			},
-			color: {
+			color: { // 字体颜色
 				type: String,
 				default: '#BEBEBE'
 			},
-			background: {
+			background: { // 背景色
 				type: String,
 				default: 'black'
 			},
-			isBack: {
+			isBack: { // 是否显示返回按钮
 				type: Boolean,
 				default: false,
+			},
+			isUrl: { // 是否自定义跳转
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
 			return {
 				
+			}
+		},
+		methods: {
+			backPage() {
+				if (this.isUrl) {
+					this.$emit('backPage')
+
+				} else {
+					uni.navigateBack({
+						delta: 1
+					})
+					
+				}
+							
 			}
 		},
 		computed: {
@@ -69,6 +90,9 @@
 	}
 	.back {
 		width: 60upx;
+		.back_content {
+			width: 60upx;
+		}
 		.iconfont {
 			font-size: 40upx;
 		}
