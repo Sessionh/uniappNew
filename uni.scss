@@ -184,19 +184,57 @@ $uni-font-size-paragraph:30upx;
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.border-iphone {
+	
+}
 
-
+@mixin iphone-x($color: #e6e6e6) {
+	 & { 
+		 /* 在这里做iPhone X的判断 */
+		 @media screen and (device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio: 3) {
+		   border-bottom: 40px solid $color;
+		 }
+		 
+		 /* 1792x828px at 326ppi  iPhone XR*/
+		 @media only screen 
+		   and (device-width : 414px) 
+		   and (device-height : 896px) 
+		   and (-webkit-device-pixel-ratio : 2) {
+		     border-bottom: 34px solid $color;
+		 }
+		 
+		 /* 2436x1125px at 458ppi  iPhone XS*/
+		 
+		 @media only screen 
+		   and (device-width : 375px) 
+		   and (device-height : 812px) 
+		   and (-webkit-device-pixel-ratio : 3) {
+			 border-bottom: 34px solid $color;
+		 }
+		 
+		 /* 2688x1242px at 458ppi iPhone XS Max*/
+		 @media only screen 
+		   and (device-width : 414px) 
+		   and (device-height : 896px) 
+		   and (-webkit-device-pixel-ratio : 3) {
+		    .border-iphone {
+		     border-bottom: 34px solid $color;
+		   }
+		 
+		 }
+		 
+	 }
+	
+	
+}
 /* 在这里做iPhone X的判断 */
-
 @media screen and (device-width:375px) and (device-height:812px) and (-webkit-device-pixel-ratio: 3) {
   .border-iphone {
-    /* bottom: 40px; */
     border-bottom: 40px solid #fff;
   }
 }
 
 /* 1792x828px at 326ppi  iPhone XR*/
-
 @media only screen 
   and (device-width : 414px) 
   and (device-height : 896px) 
@@ -210,7 +248,6 @@ $uni-font-size-paragraph:30upx;
 }
 
 /* 2436x1125px at 458ppi  iPhone XS*/
-
 @media only screen 
   and (device-width : 375px) 
   and (device-height : 812px) 

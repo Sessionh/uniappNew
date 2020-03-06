@@ -1,35 +1,50 @@
 <template>
 	<view class="template">
 		<view class="scroll" >
-			<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper" @scrolltolower="lower"
-			 @scroll="scroll">
+			<scroll>
+				<view class="li">
+					测试
+					<text class="iconfont icon-red_packet"></text>
+						
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+				<view class="li">
+					测试
+				</view>
+			</scroll>
 			
-				<view class="li">
-					测试
-					<view class="iconfont icon-red_packet"></view>
-			
-				</view>
-				<view class="li">
-					测试
-				</view>
-				<view class="li">
-					测试
-				</view>
-				<view class="li">
-					测试
-				</view>
-				<view class="li">
-					测试
-				</view>
-				<view class="li">
-					测试
-				</view>
-				<view class="li">
-					测试
-				</view>
-				
-				<view class="border-iphone">底部</view>
-			</scroll-view>
     </view>
 		<!-- <view class="demo">客诉</view> -->
 		

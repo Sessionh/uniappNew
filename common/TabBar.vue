@@ -5,7 +5,7 @@
 			<view class="item-tab" v-for="(item, index) in menuList" :key="index" @click="itemClick(item)">
 				<view class="item-content"  :style="{color: menuIndex == item.id? color: ''}">
 					<!-- <img :src="menuIndex == index? item.image[0] : item.image[1]"> -->
-					<view class="iconfont" :class="item.icon"></view>
+					<text class="iconfont" :class="item.icon"></text>
 					<view class="title">
 						{{item.name}}
 					</view>
@@ -140,6 +140,10 @@
 				img {
 					width: 38rpx;
 					height: 38rpx;
+				}
+				.item-content {
+					text-align: center;
+					
 				}
 
 				.iconfont {

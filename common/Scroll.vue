@@ -1,95 +1,100 @@
 <template>
 	<view class="me-scroll">
-		<mescroll-uni class="mescroll" ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback" :down="downOption" :up="upOption">
-			
-			<view class="li">
-				测试
-				<view class="iconfont icon-red_packet"></view>
+		<scroll-view 
+		  class="scroll"
+      :scroll-x="scrollX"
+			:scroll-y="scrollY"  
+			:scroll-top="scrollTop" 
+			:show-scrollbar="showScrollbar"
+			@scrolltoupper="upper" 
+			@scrolltolower="lower"
+		  @scroll="scroll"
+			>
+		  <slot></slot>
+		
+			<mButton :isLoad="true"></mButton>
+			<!-- <Loading :message="message"></Loading> -->
+      <view class="bottom-msg border-iphone">
 				
 			</view>
-			<view class="li">
-				测试
-			</view>
-			<view class="li">
-				测试
-			</view>
-			<view class="li">
-				测试
-			</view>
-			<view class="li">
-				测试
-			</view>
-			<view class="li">
-				测试
-			</view>
-			<view class="li">
-				测试
-			</view>
-			<view class="but" @click="but">点击</view>
-    </mescroll-uni>
+		</scroll-view>
+		
+		
 
 	</view>
 </template>
 
 <script>
-	
+	import Loading from '@/common/mLoader.vue'
 	export default {
+		components: {
+			Loading
+		},
+		props: {
+		  // 列表页数据
+			data: {
+				default: null
+			},
+			scrollX: {
+				type: Boolean,
+				default: false
+			},
+      scrollY: {
+				type: Boolean,
+				default: true
+			},
+			// 显示滚动条
+			showScrollbar: {
+				type: Boolean,
+				default: true
+			},
 		
+		},
 		data() {
 			return {
-				mescroll: ''
+				mescroll: '',
+				message: '',
+				isShowTop: false,
+				height: 0,
+			
 
 			}
 		},
-		methods: {
-			but() {
-				this.mescroll.triggerUpScroll()
-				
-			},
-			/*mescroll组件初始化的回调,可获取到mescroll对象 (此处可删,mixins已默认)*/
-			mescrollInit(mescroll) {
-				this.mescroll = mescroll;
-			},
-			/*下拉刷新的回调, 有三种处理方式:*/
-			downCallback() {
-				
-				setTimeout(() => {
-						this.mescroll.resetUpScroll(); 
+		mounted() {
+			uni.getSystemInfo({
+				success: (e) => {
+					console.log(e)
+					this.height = e.screenHeight ? e.screenHeight : 0
 					
-				}, 2000)
+				}
+			})
+			
+		},
+		methods: {
+			// 滚动到顶部/左边
+			upper(e) {
+				console.log('顶部')
+				
+			},
+			// 滚动到底部/右边
+			lower() {
+				console.log('底部')
+				
+			},
+			scroll(e) {
+		
+				let top = e.detail.scrollTop;
+						console.log(top, this.height)
 			
 				
 				
-			},
-			upCallback(page) {
-				let pageNum = page.num; // 页码, 默认从1开始
-				let pageSize = page.size; // 页长, 默认每页10条
-				uni.request({
-					url: 'xxxx?pageNum=' + pageNum + '&pageSize=' + pageSize,
-					success: (data) => {
-						
-						
-
-						//设置列表数据
-						if (mescroll.num == 1) this.dataList = []; //如果是第一页需手动置空列表
-						this.dataList = this.dataList.concat(curPageData); //追加新数据
-
-					
-						this.mescroll.endByPage(curPageLen, totalPage);
-
-						this.$nextTick(() => {
-							this.mescroll.endSuccess(curPageLen)
-						})
-
-					
-					},
-					fail: () => {
-						//  请求失败,隐藏加载状态
-						this.mescroll.endErr()
-					}
-				})
 				
-			}
+			},
+		
+				
+				
+			
+			
 
 		}
 	}
@@ -100,10 +105,15 @@
 		width: 0;
 		height: 0;
 		background-color: transparent;
+	
 	}
 	
-	.mescroll {
-		height: 300rpx;
+	.scroll {
+		height: 100%
+	}
+	.loading-img {
+		width: 80rpx;
+		height: 80rpx;
 	}
 	
 	.me-scroll {
@@ -129,6 +139,21 @@
 		.icon-red_packet {
 			color: #007AFF
 		}
+	}
+	
+	.to_top {
+	  height: 60rpx;
+	  width: 60rpx;
+	
+	  position: absolute;
+	  bottom: 120rpx;
+	  right: 25rpx;
+	  z-index: 100;
+		@include iphone-x(#f5f5f5)
+	  image {
+	    height: 60rpx;
+	    width: 60rpx;
+	  }
 	}
 
 </style>

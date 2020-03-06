@@ -16,4 +16,8 @@
 <style>
 	/*每个页面公共css */
 	@import url("static/font/iconfont.css");
+	
+	page {
+		background-color: #f5f5f5;
+	}
 </style>

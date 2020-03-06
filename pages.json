@@ -3,56 +3,54 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "商城"
 			}
+		}, {
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
+		}, {
+			"path": "pages/reset/reset",
+			"style": {}
+		}, {
+			"path": "pages/myPage/myPage",
+			"style": {}
 		}
-    ,{
-            "path" : "pages/message/message",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/reset/reset",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/myPage/myPage",
-            "style" : {}
-        }
-    ],
-		"tabBar": {
-				"color": "#fff",
-				"selectedColor": "#fff",
-				"borderStyle": "white",
-				"backgroundColor": "#fff",
-				"list": [
-					{
-						"pagePath": "pages/index/index",
-						"iconPath": "static/default.png",
-						"selectedIconPath": "static/default.png",
-						"text": "首页"
-					},
-				
-					{
-						"pagePath": "pages/message/message",
-						"iconPath": "static/default.png",
-						"selectedIconPath": "static/default.png",
-						"text": "笔记"
-					},
-					{
-						"pagePath": "pages/reset/reset",
-						"iconPath": "static/default.png",
-						"selectedIconPath": "static/default.png",
-						"text": "图标"
-					},
-					{
-						"pagePath": "pages/myPage/myPage",
-						"iconPath": "static/default.png",
-						"selectedIconPath": "static/default.png",
-						"text": "我的"
-					}
-					
-				]
+	],
+	"tabBar": {
+		"color": "#fff",
+		"selectedColor": "#fff",
+		"borderStyle": "white",
+		"backgroundColor": "#fff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/default.png",
+				"selectedIconPath": "static/default.png",
+				"text": "首页"
 			},
+
+			{
+				"pagePath": "pages/message/message",
+				"iconPath": "static/default.png",
+				"selectedIconPath": "static/default.png",
+				"text": "笔记"
+			},
+			{
+				"pagePath": "pages/reset/reset",
+				"iconPath": "static/default.png",
+				"selectedIconPath": "static/default.png",
+				"text": "图标"
+			},
+			{
+				"pagePath": "pages/myPage/myPage",
+				"iconPath": "static/default.png",
+				"selectedIconPath": "static/default.png",
+				"text": "我的"
+			}
+
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
