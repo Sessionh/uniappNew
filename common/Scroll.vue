@@ -12,9 +12,19 @@
 			>
 		  <slot></slot>
 		
-			<mButton :isLoad="true"></mButton>
+			
 			<!-- <Loading :message="message"></Loading> -->
-      <view class="bottom-msg border-iphone">
+      <view class="bottom-msg" v-if="isBottom">
+				 <div
+					v-if="!isLoad && data  && data.length >= noMoreNum"
+					class="text"
+				>{{isMore?  tip : noMoreText}}</div>
+
+				<div
+					v-if="!isLoad && (!data  || data.length === 0) && isNoData"
+					class="text"
+				>{{noDataText}}</div>
+				<mButton v-if="isLoad" :isLoad="isLoad"></mButton>
 				
 			</view>
 		</scroll-view>
@@ -47,6 +57,68 @@
 			showScrollbar: {
 				type: Boolean,
 				default: true
+			},
+			 tip: {
+				type: String,
+				default: "上拉加载更多"
+			},
+			/**
+			 *  没有更多数据显示
+			 */
+			noMoreText: {
+				type: String,
+				default: '没有更多数据'
+			},
+			/**
+			*  显示 没有更多数据 最小数组长度
+			*/
+			noMoreNum: {
+				type: String,
+				default: '3'
+			},
+			/**
+			 *  显示 加载动画
+			 */
+			isLoad: {
+				type: Boolean,
+				default: false,
+			},
+			/**
+			*  控制上拉加载更多 和 无更多数据 状态
+			*/
+			isMore: {
+				type: Boolean,
+				default: true,
+			},
+			/**
+			*  控制显示返回顶部 图标
+			*/
+			isTop: {
+				type: Boolean,
+				default: true
+			},
+			/**
+			*  控制底部显示
+			*/
+			isBottom: {
+				type: Boolean,
+				default: true,
+	
+			},
+			/**
+		 *  是否显示 暂无数据
+		 */
+			isNoData: {
+				type: Boolean,
+				default: false,
+	
+			},
+			/**
+			*   暂无数据
+			*/
+			noDataText: {
+				type: String,
+				default: '暂无数据',
 			},
 		
 		},
@@ -155,5 +227,23 @@
 	    width: 60rpx;
 	  }
 	}
+	.bottom-msg {
+	
+	}
+	
+	.bottom-msg {
+			min-height: 100rpx;
+			position: relative;
+			color: #999999;
+			font-size: 28rpx;
+			@include iphone-x(#f5f5f5);
+
+			.text {
+				line-height: 100px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+	 }
 
 </style>

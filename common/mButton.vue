@@ -103,9 +103,9 @@
 	.spinner {
 		position: relative;
 		display: inline-block;
-		width: 60rpx;
+		width: 50rpx;
 		max-width: 100%;
-		height: 60rpx;
+		height: 50rpx;
 		max-height: 100%;
 		vertical-align: middle;
 		animation: van-rotate 0.8s linear infinite;
